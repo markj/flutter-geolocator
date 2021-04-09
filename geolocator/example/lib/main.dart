@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:baseflow_plugin_template/baseflow_plugin_template.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,11 @@ class _GeolocatorWidgetState extends State<GeolocatorWidget> {
             bottom: 10.0,
             right: 10.0,
             child: FloatingActionButton.extended(
-              onPressed: () => setState(_positionItems.clear),
+              onPressed: () => {
+                setState(_positionItems.clear),
+                Geolocator.supportsGps()
+                    .then((value) => {log(value.toString())})
+              },
               label: Text("clear"),
             ),
           ),
